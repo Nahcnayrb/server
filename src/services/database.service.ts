@@ -7,18 +7,19 @@ export const collections: { players?: mongoDB.Collection } = {}
 
 // Initialize Connection
 
+
 export async function connectToDatabase () {
-    dotenv.config();
+  dotenv.config();
+
+  const client: mongoDB.MongoClient = new mongoDB.MongoClient(process.env.DB_CONN_STRING as string);
+          
+  await client.connect();
+      
+  const db: mongoDB.Db = client.db(process.env.DB_NAME);
  
-    const client: mongoDB.MongoClient = new mongoDB.MongoClient("mongodb+srv://bch4n:2rPBFZpzKiNiMhNI@cluster0.duecilj.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0");
-            
-    await client.connect();
-        
-    const db: mongoDB.Db = client.db("Pickelo");
-   
-    const playersCollection: mongoDB.Collection = db.collection("Players");
- 
-  collections.players = playersCollection;
-       
-         console.log(`Successfully connected to database: ${db.databaseName} and collection: ${playersCollection.collectionName}`);
- }
+  const playersCollection: mongoDB.Collection = db.collection(process.env.PLAYERS_COLLECTION_NAME as string);
+
+collections.players = playersCollection;
+     
+       console.log(`Successfully connected to database: ${db.databaseName} and collection: ${playersCollection.collectionName}`);
+}
