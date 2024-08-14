@@ -9,7 +9,7 @@ import loginRouter from './routes/login';
 dotenv.config();
 
 const app: Express = express();
-//const port = process.env.PORT || 8080;
+const port = process.env.PORT || 8080;
 
 const allowedOrigins = ['http://localhost:3000','http://192.168.1.97:3000'];
 
@@ -25,9 +25,9 @@ connectToDatabase()
     app.use('/players', usersRouter);
     app.use('/login', loginRouter);
 
-    // app.listen(port, () => {
-    //   console.log(`[server]: Server is running at http://localhost:${port}`);
-    // });
+    app.listen(port, () => {
+      console.log(`[server]: Server is running at http://localhost:${port}`);
+    });
 
   })
   .catch((error: Error) => {
