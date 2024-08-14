@@ -9,7 +9,7 @@ import loginRouter from './routes/login';
 dotenv.config();
 
 const app: Express = express();
-const port = process.env.PORT || 3069;
+const port = process.env.PORT || 8080;
 
 const allowedOrigins = ['http://localhost:3000','http://192.168.1.97:3000'];
 
