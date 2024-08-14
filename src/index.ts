@@ -11,12 +11,6 @@ dotenv.config();
 const app: Express = express();
 const port = process.env.PORT || 8080;
 
-const allowedOrigins = ['http://localhost:3000','http://192.168.1.97:3000'];
-
-const options: cors.CorsOptions = {
-  origin: allowedOrigins
-};
-
 connectToDatabase()
   .then(() => {
 
