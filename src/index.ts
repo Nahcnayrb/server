@@ -21,7 +21,12 @@ connectToDatabase()
   .then(() => {
 
     //app.use(cors())
-    app.use(cors(options));
+    app.use(function(req, res, next) {
+      res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
+      res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+      next();
+    });
+    //app.use(cors(options));
     app.use('/players', usersRouter);
     app.use('/login', loginRouter);
 
