@@ -10,13 +10,13 @@ export const collections: { players?: mongoDB.Collection } = {}
 export async function connectToDatabase () {
     dotenv.config();
  
-    const client: mongoDB.MongoClient = new mongoDB.MongoClient(process.env.DB_CONN_STRING as string);
+    const client: mongoDB.MongoClient = new mongoDB.MongoClient("mongodb+srv://bch4n:2rPBFZpzKiNiMhNI@cluster0.duecilj.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0");
             
     await client.connect();
         
-    const db: mongoDB.Db = client.db(process.env.DB_NAME);
+    const db: mongoDB.Db = client.db("Pickelo");
    
-    const playersCollection: mongoDB.Collection = db.collection(process.env.PLAYERS_COLLECTION_NAME as string);
+    const playersCollection: mongoDB.Collection = db.collection("Players");
  
   collections.players = playersCollection;
        
