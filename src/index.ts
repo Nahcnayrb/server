@@ -5,7 +5,7 @@ import usersRouter from './routes/users';
 import { connectToDatabase } from "./services/database.service";
 import cors from 'cors';
 import loginRouter from './routes/login';
-
+import duelsRouter from './routes/duels';
 dotenv.config();
 
 const app: Express = express();
@@ -18,11 +18,14 @@ connectToDatabase()
     app.use(function(req, res, next) {
       res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
       res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+      res.header("Access-Control-Allow-Methods", "POST, PUT, GET, DELETE, OPTIONS")
       next();
     });
     //app.use(cors(options));
     app.use('/players', usersRouter);
     app.use('/login', loginRouter);
+    app.use('/duels', duelsRouter)
+
 
     app.listen(port, () => {
       console.log(`[server]: Server is running at http://localhost:${port}`);

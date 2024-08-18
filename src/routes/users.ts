@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { createUser, getUserByUsername, getUsers } from "../handlers/users";
+import { createUser, getUserByUsername, getUsers, updateUser } from "../handlers/users";
 import bodyParser, { BodyParser} from "body-parser";
 
 const router = Router();
@@ -15,5 +15,7 @@ router.get('/:username', getUserByUsername)
 // /players/
 
 router.post('/', jsonParser, createUser)
+
+router.put("/:username", jsonParser, updateUser)
 
 export default router;

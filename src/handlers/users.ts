@@ -3,6 +3,7 @@ import { CreateUserDto } from "../dtos/CreateUser.dto";
 import { collections } from "../services/database.service";
 import bcrypt from "bcryptjs";
 import * as crypto from "crypto";
+import { ObjectId } from "mongodb";
 
 export async function getUsers(request:Request, response:Response) {
     try {
@@ -19,7 +20,6 @@ export async function getUsers(request:Request, response:Response) {
 
 export async function getUserByUsername(request:Request<{username: string},{},{}>, response:Response) {
     try {
-        console.log(request.params.username)
         const players = (await collections.players!.find({username: request.params.username}).toArray()) as CreateUserDto[];
         if (players.length == 0) {
             response.status(400).send("could not find the specified user.")
@@ -83,4 +83,25 @@ export async function createUser(request:Request<{},{}, CreateUserDto>, response
         }
     }
 
-} 
+}
+
+export async function updateUser(request:Request<{username: string},{}, CreateUserDto>, response:Response) {
+
+    try {
+        const playerData = request.body as CreateUserDto;
+        const query = {username: request.params.username};
+
+        const result = await collections.players?.updateOne(query, {$set: playerData})
+
+        return result
+        ? response.status(201).send("Updated Player.")
+        : response.status(500).send("Failed to update player.");
+
+    } catch (error) {
+        if (error instanceof Error) {
+            return response.status(500).send(error.message);
+        }
+    }
+
+
+}
