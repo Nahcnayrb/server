@@ -9,4 +9,5 @@ export interface CreateUserDto extends WithId<Document> {
     password: string;
     elo: number;
     token: string;
+    hasPfp: boolean;
 }

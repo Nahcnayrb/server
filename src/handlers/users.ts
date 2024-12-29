@@ -68,6 +68,7 @@ export async function createUser(request:Request<{},{}, CreateUserDto>, response
             playerData.username = playerData.username.trim().toLowerCase();
             playerData.password = hashedPassword;
             playerData.elo = 1000;
+            playerData.hasPfp = false;
             playerData.token = crypto.randomUUID();
             const result = await collections.players?.insertOne(playerData);
 

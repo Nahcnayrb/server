@@ -11,7 +11,6 @@ router.get('/',  getUsers);
 // /players/123
 router.get('/:username', getUserByUsername)
 
-
 // /players/
 
 router.post('/', jsonParser, createUser)

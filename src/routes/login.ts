@@ -3,6 +3,7 @@ import bodyParser, { BodyParser} from "body-parser";
 import { collections } from "../services/database.service";
 import { CreateUserDto } from "../dtos/CreateUser.dto";
 import bcrypt from "bcryptjs";
+import { BlobServiceClient } from '@azure/storage-blob';
 
 const router = Router();
 const jsonParser = bodyParser.json();
