@@ -14,6 +14,21 @@ export async function getDuels(request:Request, response:Response) {
     }
 }
 
+export async function getDuelsByUsername(request:Request<{username:string},{},{}>, response:Response) {
+    console.log(request.params.username)
+
+    try {
+        const duels = (await collections.duels!.find({$or: [{higherEloUsername: request.params.username}, {lowerEloUsername: request.params.username}]}).toArray()) as CreateDuelDto[];
+        console.log(duels);
+        response.status(200).send(duels);
+    } catch (error) {
+        if (error instanceof Error) {
+            response.status(500).send(error.message);
+        }
+    }
+
+}
+
 export async function createDuel(request:Request<{},{}, CreateDuelDto>, response:Response) {
     const duelData = request.body as CreateDuelDto;
 

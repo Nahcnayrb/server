@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { getDuels, createDuel, updateDuel, deleteDuel } from "../handlers/duels";
+import { getDuels, createDuel, updateDuel, deleteDuel, getDuelsByUsername } from "../handlers/duels";
 import bodyParser, { BodyParser} from "body-parser";
 
 const router = Router();
@@ -7,6 +7,9 @@ const router = Router();
 const jsonParser = bodyParser.json()
 // /duels
 router.get('/',  getDuels);
+
+// only get duels concerning a specific user
+router.get('/:username',  getDuelsByUsername);
 
 router.post('/', jsonParser, createDuel)
 
