@@ -42,7 +42,7 @@ export async function updateDuel(request:Request<{duelId:string},{}, CreateDuelD
 
     try {
         const duelData = request.body as CreateDuelDto;
-        duelData.date = new Date();
+        // duelData.date = new Date();
         const duelId =  request.params.duelId;
         const query = {_id: new ObjectId(duelId)};
 
