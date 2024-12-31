@@ -10,4 +10,5 @@ export interface CreateDuelDto extends WithId<Document> {
     higherEloScore: number;
     lowerEloScore: number;
     date: Date;
+    videoUrl: string;
 }
